@@ -1,0 +1,42 @@
+  /*the target in this case is the form that we have defined in our component
+
+  How do we access the data contained in the form's input element?
+
+There are many ways to accomplish this; the first method we will take a look at is through the use of so-called controlled components.
+
+Let's add a new piece of state called newNote for storing the user-submitted input and let's set it as the input element's value attribute:
+
+   event preventdefault cuz u cant put false to reload page, event Parameter is event that triggers the call to the event handler function
+
+  We have added the addNote function as an event handler to the form element that will be called when the form is submitted, by clicking the submit button.
+
+   HTML form to the component that will be used for adding new notes 
+
+   In order to enable editing of the input element, we have to register an event handler that synchronizes the changes made to the input with the component's state:
+   */
+
+The target property of the event object now corresponds to the controlled input element and event.target.value refers to the input value of that element.
+
+Note that we did not need to call the event.preventDefault() method like we did in the onSubmit event handler. This is because there is no default action that occurs on an input change, unlike on a form submission.
+
+
+
+const addNote = (event) => {
+  event.preventDefault()
+  const noteObject = {
+    content: newNote,
+    date: new Date().toISOString(),
+    important: Math.random() < 0.5,
+    id: notes.length + 1,
+  }
+
+  setNotes(notes.concat(noteObject))
+  setNewNote('')
+}
+First we create a new object for the note called noteObject that will receive its content from the component's newNote state. The unique identifier id is generated based on the total number of notes.
+
+FILTER ------------  const [showAll, setShowAll] = useState(true);
+const notesToShow = showAll ? notes : notes.filter(note => note.important)
+      <div>
+        <button onClick={() => setShowAll(!showAll)}>show {showAll ? 'important' : 'all'}</button>
+      </div>
